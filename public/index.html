@@ -1,0 +1,2614 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DQueen Florist — Atelier Jurnal Keuangan</title>
+  <!-- Boutique Atelier Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+      --font-sans: "Outfit", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      /* Boutique Atelier Color Palette */
+      --bg: #FAF8F5;            /* Warm Ivory Linen Canvas */
+      --surface: #FFFFFF;       /* Pure Warm Porcelain */
+      --surface-warm: #F4EFEA;  /* Warm Stone Paper */
+      --surface-subtle: #F7F4EF;/* Chamomile Wash */
+      --border: #E8E2D8;        /* Soft Linen Hairline */
+      --border-strong: #D6CCC0; /* Tactile Border */
+
+      --text: #19261E;          /* Deep Botanical Evergreen Charcoal */
+      --text-muted: #4B5B52;    /* Muted Moss Gray (>= 5.5:1 on white) */
+      --text-subtle: #5E6E65;   /* Soft Foliage Gray (>= 4.6:1 on white) */
+
+      --brand: #1B382B;         /* Deep Forest Evergreen */
+      --brand-hover: #132A20;   /* Midnight Pine */
+      --brand-surface: #EBF2ED; /* Leaf Tint */
+
+      --gold: #B8935B;          /* Antique Champagne Gold */
+      --gold-hover: #9E7B47;
+      --gold-surface: #F8F3EA;  /* Champagne Wash */
+
+      --danger: #B33939;        /* Vintage Crimson */
+      --danger-bg: #FDF2F2;
+      --danger-border: #F5D0D0;
+
+      --focus-ring: 0 0 0 3px rgba(27, 56, 43, 0.14);
+
+      /* Botanical Category Tokens */
+      --bunga: #9E2A4B;         /* Vintage Rose Petal */
+      --bunga-bg: #FDF0F4;
+      --bunga-border: #F5D4DE;
+
+      --florist: #8F5326;       /* Terracotta Clay */
+      --florist-bg: #FDF5EE;
+      --florist-border: #F3DCB4;
+
+      --kendaraan: #1D6348;     /* Forest Pine */
+      --kendaraan-bg: #EDF7F2;
+      --kendaraan-border: #C8E6D7;
+
+      --lainnya: #485B6C;       /* Antique Slate */
+      --lainnya-bg: #F0F4F8;
+      --lainnya-border: #D1DDE7;
+
+      --dels: #684984;          /* Wisteria Iris */
+      --dels-bg: #F6F1FA;
+      --dels-border: #E2D4F0;
+
+      --radius-sm: 6px;
+      --radius: 10px;
+      --shadow-sm: 0 1px 3px rgba(25, 38, 30, 0.04);
+      --shadow-card: 0 2px 8px rgba(25, 38, 30, 0.04), 0 1px 2px rgba(25, 38, 30, 0.02);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    ::selection {
+      background: #EADECC;
+      color: #19261E;
+    }
+
+    ::-webkit-scrollbar {
+      width: 7px;
+      height: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF8F5;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #D8CEBF;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #B8935B;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: 14px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 72px;
+    }
+
+    /* Top Bar */
+    .topbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: 0 1px 3px rgba(25, 38, 30, 0.02);
+    }
+    .topbar-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0 28px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-crest {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--brand);
+      color: #FAF4E8;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 1px 4px rgba(27, 56, 43, 0.2);
+    }
+    .brand-crest-text {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      font-style: italic;
+      letter-spacing: -0.5px;
+    }
+    .brand-title-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .brand-name {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 0.1px;
+      color: var(--brand);
+    }
+    .brand-divider {
+      color: var(--border-strong);
+      font-weight: 300;
+      font-size: 14px;
+    }
+    .brand-section {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .db-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 5px 11px;
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+    }
+    .db-status-dot {
+      width: 7px;
+      height: 7px;
+      background: #1D6348;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(29, 99, 72, 0.2);
+    }
+
+    /* Layout */
+    .app-shell {
+      max-width: 1440px;
+      margin: 24px auto;
+      padding: 0 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* Toolbar: Period & Export */
+    .toolbar {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      box-shadow: var(--shadow-sm);
+    }
+    .period-navigator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .control-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-right: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .period-select {
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      padding: 7px 12px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      cursor: pointer;
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .period-select:focus-visible {
+      box-shadow: var(--focus-ring);
+      border-color: var(--brand);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+      white-space: nowrap;
+    }
+    .btn-secondary {
+      background: var(--surface);
+      border-color: var(--border-strong);
+      color: var(--text);
+    }
+    .btn-secondary:hover {
+      background: var(--surface-warm);
+      border-color: #C2B7A8;
+    }
+    .btn-icon-only {
+      padding: 7px 9px;
+    }
+    .btn-primary {
+      background: var(--brand);
+      color: #FAF4E8;
+      border-color: var(--brand);
+      box-shadow: 0 1px 3px rgba(27, 56, 43, 0.2);
+    }
+    .btn-primary:hover {
+      background: var(--brand-hover);
+      border-color: var(--brand-hover);
+    }
+    .btn-excel {
+      background: #FAF6F0;
+      border-color: #D6CCC0;
+      color: var(--brand);
+    }
+    .btn-excel:hover {
+      background: #F2ECE0;
+      border-color: var(--gold);
+      color: #132A20;
+    }
+
+    /* Ledger Summary Grid (Interactive Filters) */
+    .ledger-summary {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: grid;
+      grid-template-columns: 1.8fr repeat(5, 1fr);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    @media (max-width: 1100px) {
+      .ledger-summary { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 680px) {
+      .ledger-summary { grid-template-columns: 1fr; }
+    }
+    .summary-cell {
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--border);
+      gap: 6px;
+      position: relative;
+    }
+    .summary-cell:last-child {
+      border-right: none;
+    }
+    .summary-cell-total {
+      background: var(--brand);
+      color: #FAF4E8;
+    }
+    .summary-cell-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .summary-cell-total .summary-cell-title {
+      color: #CFC0A8;
+    }
+    .summary-cell-amount {
+      font-size: 19px;
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.3px;
+      color: var(--text);
+    }
+    .summary-cell-total .summary-cell-amount {
+      font-size: 23px;
+      color: #FAF4E8;
+      font-family: var(--font-sans);
+    }
+
+    .summary-cell.clickable {
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.15s;
+    }
+    .summary-cell.clickable:hover {
+      background-color: var(--surface-subtle);
+    }
+    .summary-cell.clickable.summary-cell-total:hover {
+      background-color: var(--brand-hover);
+    }
+    .summary-cell.clickable.active-filter::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gold);
+    }
+    .summary-cell-total.active-filter::after {
+      background: #E8D5B5;
+    }
+
+    .category-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .indicator-bunga { background: var(--bunga); }
+    .indicator-florist { background: var(--florist); }
+    .indicator-kendaraan { background: var(--kendaraan); }
+    .indicator-lainnya { background: var(--lainnya); }
+    .indicator-dels { background: var(--dels); }
+
+    /* Modal Dialog */
+    .entry-modal {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      max-width: 820px;
+      width: calc(100% - 32px);
+      margin: auto;
+      padding: 0;
+      box-shadow: 0 20px 48px rgba(25, 38, 30, 0.18);
+      outline: none;
+    }
+    .entry-modal::backdrop {
+      background: rgba(25, 38, 30, 0.45);
+      backdrop-filter: blur(3px);
+    }
+    .modal-wrapper {
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--brand);
+    }
+    .modal-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+    .btn-close-modal {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 22px;
+      line-height: 1;
+      padding: 2px 8px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.12s, color 0.12s;
+    }
+    .btn-close-modal:hover {
+      background: var(--surface-warm);
+      color: var(--text);
+    }
+
+    /* Category Segment Selector */
+    .category-segments {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .category-tab-btn {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border-strong);
+      background: var(--surface-subtle);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background-color 0.15s, border-color 0.15s, color 0.15s, box-shadow 0.15s;
+    }
+    .category-tab-btn:hover {
+      background: var(--surface-warm);
+      color: var(--text);
+      border-color: #C4B9A9;
+    }
+    .category-tab-btn.active {
+      background: var(--brand);
+      color: #FAF4E8;
+      border-color: var(--brand);
+      box-shadow: 0 1px 3px rgba(27, 56, 43, 0.2);
+    }
+
+    /* Form Grid */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .col-2 { grid-column: span 2; }
+    .col-3 { grid-column: span 3; }
+    .col-4 { grid-column: span 4; }
+    .col-6 { grid-column: span 6; }
+    .col-8 { grid-column: span 8; }
+    .col-12 { grid-column: span 12; }
+
+    @media (max-width: 600px) {
+      .col-2, .col-3, .col-4, .col-6, .col-8 { grid-column: span 12; }
+    }
+
+    .form-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: 0.2px;
+    }
+    .form-input {
+      font-family: inherit;
+      padding: 8px 12px;
+      font-size: 13px;
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      outline: none;
+      background: #FAF8F5;
+      transition: border-color 0.15s, box-shadow 0.15s, background-color 0.15s;
+    }
+    .form-input:focus {
+      background: #FFFFFF;
+      border-color: var(--brand);
+      box-shadow: var(--focus-ring);
+    }
+    .form-input-number {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .form-input-total {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--brand);
+    }
+    .input-hint {
+      font-size: 12px;
+      color: var(--text-subtle);
+      margin-top: 2px;
+      font-weight: 500;
+      min-height: 16px;
+    }
+    .input-hint strong {
+      color: var(--brand);
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .modal-shortcuts-hint {
+      font-size: 12px;
+      color: var(--text-subtle);
+    }
+    .modal-shortcuts-hint kbd {
+      background: var(--surface-warm);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      padding: 1px 5px;
+      font-size: 12px;
+      color: var(--brand);
+      font-weight: 600;
+    }
+    .modal-actions-right {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* Ledger Table Card */
+    .ledger-table-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .table-toolbar {
+      padding: 12px 20px;
+      background: #FAF8F5;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .filter-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .filter-pill {
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background-color 0.15s, color 0.15s, border-color 0.15s;
+    }
+    .filter-pill:hover {
+      background: var(--surface-warm);
+      color: var(--text);
+    }
+    .filter-pill.active {
+      background: var(--brand);
+      color: #FAF4E8;
+      border-color: var(--brand);
+    }
+
+    .search-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-input {
+      font-family: inherit;
+      padding: 7px 28px 7px 32px;
+      font-size: 12px;
+      border: 1px solid var(--border-strong);
+      border-radius: 20px;
+      width: 240px;
+      outline: none;
+      background: #FFFFFF;
+      transition: width 0.18s ease, border-color 0.15s, box-shadow 0.15s;
+    }
+    .search-input:focus-visible {
+      border-color: var(--brand);
+      box-shadow: var(--focus-ring);
+      width: 290px;
+    }
+    .search-icon-svg {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+      color: var(--text-subtle);
+    }
+    .search-clear-btn {
+      position: absolute;
+      right: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 15px;
+      padding: 2px 4px;
+      border-radius: 50%;
+      display: none;
+      line-height: 1;
+    }
+    .search-clear-btn:hover {
+      color: var(--text);
+    }
+
+    .kbd-guide {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .kbd-guide kbd {
+      background: var(--surface-warm);
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--brand);
+    }
+
+    /* Table Styles */
+    .table-scroll {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      text-align: left;
+    }
+    thead th {
+      background: #F2EEE8;
+      color: #3B4B42;
+      font-weight: 700;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 11px 16px;
+      border-bottom: 1px solid var(--border-strong);
+      white-space: nowrap;
+      user-select: none;
+      cursor: pointer;
+    }
+    thead th.no-sort {
+      cursor: default;
+    }
+    thead th:hover:not(.no-sort) {
+      background: #E8E2D8;
+      color: var(--brand);
+    }
+    .sort-icon {
+      font-size: 10px;
+      margin-left: 4px;
+      display: inline-block;
+      width: 10px;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #EFECE6;
+      transition: background-color 0.12s;
+    }
+    tbody tr:hover {
+      background: #F8F5EE;
+    }
+    tbody td {
+      padding: 10px 16px;
+      vertical-align: middle;
+      color: var(--text);
+    }
+
+    .cell-num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-weight: 500;
+    }
+    .cell-bold {
+      font-weight: 700;
+      color: var(--brand);
+    }
+
+    /* Badges */
+    .badge-category {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 20px;
+      display: inline-block;
+      border: 1px solid transparent;
+      letter-spacing: 0.2px;
+    }
+    .badge-bunga { background: var(--bunga-bg); color: var(--bunga); border-color: var(--bunga-border); }
+    .badge-florist { background: var(--florist-bg); color: var(--florist); border-color: var(--florist-border); }
+    .badge-kendaraan { background: var(--kendaraan-bg); color: var(--kendaraan); border-color: var(--kendaraan-border); }
+    .badge-lainnya { background: var(--lainnya-bg); color: var(--lainnya); border-color: var(--lainnya-border); }
+    .badge-dels { background: var(--dels-bg); color: var(--dels); border-color: var(--dels-border); }
+
+    .action-cell {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+    }
+    .btn-action {
+      font-family: inherit;
+      padding: 4px 9px;
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 4px;
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.12s;
+    }
+    .btn-action:hover {
+      background: var(--surface-warm);
+      color: var(--text);
+      border-color: #B8935B;
+    }
+    .btn-action-danger {
+      color: var(--danger);
+      border-color: var(--danger-border);
+    }
+    .btn-action-danger:hover {
+      background: var(--danger-bg);
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    @keyframes rowPulse {
+      0% { background-color: #F4ECD8; }
+      100% { background-color: transparent; }
+    }
+    .row-flash td {
+      animation: rowPulse 1.8s ease-out;
+    }
+
+    /* Table Pagination */
+    .table-pagination {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 13px;
+      color: var(--text-muted);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .pagination-info {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+    }
+    .pagination-subtotal-badge {
+      color: var(--text-muted);
+    }
+    .pagination-subtotal-badge strong {
+      color: var(--brand);
+      font-variant-numeric: tabular-nums;
+    }
+    .pagination-controls {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .pagination-size-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pagination-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .pagination-select {
+      font-family: inherit;
+      font-size: 12px;
+      padding: 4px 8px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      outline: none;
+    }
+    .pagination-select:focus {
+      border-color: var(--brand);
+    }
+    .pagination-buttons {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .btn-page {
+      font-family: inherit;
+      min-width: 30px;
+      height: 30px;
+      padding: 0 6px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
+      color: var(--text);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.12s, color 0.12s, border-color 0.12s;
+    }
+    .btn-page:hover:not(:disabled) {
+      background: var(--surface-warm);
+      border-color: var(--gold);
+      color: var(--brand);
+    }
+    .btn-page:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .page-indicator {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      padding: 0 8px;
+      white-space: nowrap;
+    }
+
+    /* Analytics Card */
+    .analytics-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px 22px;
+      box-shadow: var(--shadow-sm);
+      animation: fadeIn 0.2s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.25fr;
+      gap: 24px;
+    }
+    @media (max-width: 900px) {
+      .analytics-grid { grid-template-columns: 1fr; }
+    }
+    .analytics-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .analytics-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+    }
+    .analytics-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: 0.1px;
+    }
+    .analytics-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .analytics-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--brand);
+      background: var(--surface-warm);
+      border: 1px solid var(--border-strong);
+      padding: 2px 8px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+    .stacked-bar-container {
+      width: 100%;
+      height: 18px;
+      background: var(--surface-warm);
+      border-radius: 9px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: flex;
+    }
+    .stacked-bar-seg {
+      height: 100%;
+      transition: width 0.3s ease;
+      position: relative;
+    }
+    .category-legend-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px 14px;
+      margin-top: 4px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      gap: 8px;
+    }
+    .legend-label-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+    }
+    .legend-name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: var(--text-muted);
+    }
+    .legend-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .legend-amount {
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .bar-chart-container {
+      width: 100%;
+      height: 140px;
+    }
+    .chart-bar-rect {
+      cursor: pointer;
+      transition: fill 0.12s, opacity 0.12s;
+    }
+    .chart-bar-rect:hover {
+      fill: var(--gold) !important;
+    }
+    .chart-bar-rect.active-period-bar {
+      stroke: var(--gold);
+      stroke-width: 2px;
+    }
+
+    /* Duplicate Warning */
+    .dup-warning {
+      background: #FEF3C7;
+      border: 1px solid #F59E0B;
+      color: #78350F;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+
+    /* Items Table in Modal */
+    .items-table-wrap {
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      overflow-y: auto;
+      max-height: 270px;
+      background: #FFFFFF;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .items-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .items-table th {
+      background: var(--surface-warm);
+      color: var(--text);
+      padding: 8px 10px;
+      font-weight: 600;
+      font-size: 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-strong);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+    .items-table td {
+      padding: 5px 6px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .items-input {
+      font-family: inherit;
+      font-size: 12.5px;
+      padding: 6px 9px;
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+      background: #FAF8F5;
+      outline: none;
+      transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
+    }
+    .items-input:focus {
+      border-color: var(--brand);
+      background: #FFFFFF;
+      box-shadow: 0 0 0 2px rgba(27, 56, 43, 0.1);
+    }
+    .items-input-num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .btn-remove-row {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 3px 6px;
+      border-radius: 3px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.12s, color 0.12s;
+    }
+    .btn-remove-row:hover {
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+    .items-actions-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 10px;
+      padding: 2px 0;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .btn-add-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px dashed var(--brand);
+      background: var(--surface-warm);
+      color: var(--brand);
+      cursor: pointer;
+      transition: background-color 0.15s, color 0.15s, border-style 0.15s;
+    }
+    .btn-add-item:hover {
+      background: var(--brand);
+      color: #FAF4E8;
+      border-style: solid;
+    }
+    .batch-total-display {
+      font-size: 13px;
+      color: var(--text);
+    }
+    .batch-total-display strong {
+      color: var(--brand);
+      font-size: 15px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Toast */
+    #toastNotification {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--brand);
+      color: #FAF4E8;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 600;
+      display: none;
+      z-index: 100;
+      border: 1px solid var(--gold);
+      box-shadow: 0 4px 14px rgba(27, 56, 43, 0.25);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Bar -->
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="topbar-brand">
+        <div class="brand-crest">
+          <span class="brand-crest-text">DQ</span>
+        </div>
+        <div class="brand-title-wrap">
+          <div class="brand-name">DQueen Florist</div>
+          <div class="brand-divider">/</div>
+          <div class="brand-section">Atelier Jurnal Keuangan</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="app-shell">
+
+    <!-- Toolbar: Period & Export -->
+    <div class="toolbar">
+      <div class="period-navigator">
+        <span class="control-label">Periode Buku:</span>
+        <button class="btn btn-secondary btn-icon-only" onclick="navigatePeriod(1)" title="Bulan Sebelumnya">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+        <select id="selectPeriod" class="period-select" onchange="onPeriodChange()"></select>
+        <button class="btn btn-secondary btn-icon-only" onclick="navigatePeriod(-1)" title="Bulan Selanjutnya">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:12px;">
+        <span class="kbd-guide"><kbd>/</kbd> Cari &middot; <kbd>Alt+N</kbd> Catat</span>
+        <button class="btn btn-secondary" onclick="toggleAnalytics()" id="btnToggleChart" title="Tampilkan grafik & analisis beban">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="8"></rect><rect x="10" y="8" width="4" height="12"></rect><rect x="17" y="4" width="4" height="16"></rect></svg>
+          <span id="labelToggleChart">Grafik Tren</span>
+        </button>
+        <button class="btn btn-primary" onclick="openEntryModal()" id="btnOpenModal" title="Catat transaksi baru (Alt+N)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Catat Pengeluaran
+        </button>
+        <button class="btn btn-excel" onclick="exportDataExcel()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Export Excel (.xlsx)
+        </button>
+      </div>
+    </div>
+
+    <!-- Ledger Summary Grid (Interactive Filter) -->
+    <div class="ledger-summary">
+      <div class="summary-cell summary-cell-total clickable" data-cat="Semua" onclick="applyCategoryFilter('Semua')" title="Klik untuk tampilkan semua kategori">
+        <div class="summary-cell-title" id="totalTitle">Total Beban Operasional</div>
+        <div class="summary-cell-amount" id="totalAmount">Rp 0</div>
+      </div>
+      <div class="summary-cell clickable" data-cat="Bunga" onclick="applyCategoryFilter('Bunga')" title="Klik untuk filter Bunga">
+        <div class="summary-cell-title"><span class="category-indicator indicator-bunga"></span> Bunga</div>
+        <div class="summary-cell-amount" id="sumBunga">Rp 0</div>
+      </div>
+      <div class="summary-cell clickable" data-cat="Keperluan Florist" onclick="applyCategoryFilter('Keperluan Florist')" title="Klik untuk filter Keperluan Florist">
+        <div class="summary-cell-title"><span class="category-indicator indicator-florist"></span> Keperluan Florist</div>
+        <div class="summary-cell-amount" id="sumFlorist">Rp 0</div>
+      </div>
+      <div class="summary-cell clickable" data-cat="Kendaraan Florist" onclick="applyCategoryFilter('Kendaraan Florist')" title="Klik untuk filter Kendaraan Florist">
+        <div class="summary-cell-title"><span class="category-indicator indicator-kendaraan"></span> Kendaraan Florist</div>
+        <div class="summary-cell-amount" id="sumKendaraan">Rp 0</div>
+      </div>
+      <div class="summary-cell clickable" data-cat="Biaya Lainnya" onclick="applyCategoryFilter('Biaya Lainnya')" title="Klik untuk filter Biaya Lainnya">
+        <div class="summary-cell-title"><span class="category-indicator indicator-lainnya"></span> Biaya Lainnya</div>
+        <div class="summary-cell-amount" id="sumLainnya">Rp 0</div>
+      </div>
+      <div class="summary-cell clickable" data-cat="Dels" onclick="applyCategoryFilter('Dels')" title="Klik untuk filter Dels">
+        <div class="summary-cell-title"><span class="category-indicator indicator-dels"></span> Dels</div>
+        <div class="summary-cell-amount" id="sumDels">Rp 0</div>
+      </div>
+    </div>
+
+    <!-- Analytics & Chart Card -->
+    <div id="analyticsCard" class="analytics-card" style="display:none;">
+      <div class="analytics-grid">
+        <!-- Col 1: Komposisi Belanja Bulan Ini -->
+        <div class="analytics-panel">
+          <div class="analytics-header">
+            <span class="analytics-title">Komposisi Beban Periode</span>
+            <span class="analytics-badge" id="chartPeriodLabel">-</span>
+          </div>
+          <div class="stacked-bar-container" id="categoryStackedBar"></div>
+          <div class="category-legend-grid" id="categoryLegendGrid"></div>
+        </div>
+
+        <!-- Col 2: Tren Bulanan (Semua Periode) -->
+        <div class="analytics-panel">
+          <div class="analytics-header">
+            <span class="analytics-title">Tren Pengeluaran Bulanan</span>
+            <span class="analytics-subtitle">Klik batang grafik untuk buka bulan</span>
+          </div>
+          <div class="bar-chart-container" id="monthlyBarChart"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="ledger-table-card">
+      <div class="table-toolbar">
+        <div class="filter-pills">
+          <button class="filter-pill active" data-pill="Semua" onclick="applyCategoryFilter('Semua')">
+            Semua (<span id="totalRowCount">0</span>)
+          </button>
+          <button class="filter-pill" data-pill="Bunga" onclick="applyCategoryFilter('Bunga')">Bunga</button>
+          <button class="filter-pill" data-pill="Keperluan Florist" onclick="applyCategoryFilter('Keperluan Florist')">Keperluan Florist</button>
+          <button class="filter-pill" data-pill="Kendaraan Florist" onclick="applyCategoryFilter('Kendaraan Florist')">Kendaraan Florist</button>
+          <button class="filter-pill" data-pill="Biaya Lainnya" onclick="applyCategoryFilter('Biaya Lainnya')">Biaya Lainnya</button>
+          <button class="filter-pill" data-pill="Dels" onclick="applyCategoryFilter('Dels')">Dels</button>
+        </div>
+
+        <div class="search-wrapper">
+          <svg class="search-icon-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" id="searchBox" class="search-input" placeholder="Cari transaksi (Tekan /)..." oninput="onSearchInput()">
+          <button id="btnClearSearch" class="search-clear-btn" onclick="clearSearch()" title="Hapus pencarian">&times;</button>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th class="no-sort" style="width: 36px; text-align:center;">#</th>
+              <th onclick="toggleSort('tanggal')" data-sort="tanggal">Tanggal <span class="sort-icon" id="sort_tanggal">▼</span></th>
+              <th onclick="toggleSort('kategori')" data-sort="kategori">Kategori <span class="sort-icon" id="sort_kategori"></span></th>
+              <th onclick="toggleSort('nama_toko')" data-sort="nama_toko">Toko / Supplier <span class="sort-icon" id="sort_nama_toko"></span></th>
+              <th onclick="toggleSort('jenis_barang')" data-sort="jenis_barang">Uraian / Barang <span class="sort-icon" id="sort_jenis_barang"></span></th>
+              <th class="no-sort cell-num" style="width: 50px;">Qty</th>
+              <th class="no-sort" style="width: 55px;">Sat</th>
+              <th class="no-sort cell-num">Harga</th>
+              <th onclick="toggleSort('jumlah')" data-sort="jumlah" class="cell-num">Total <span class="sort-icon" id="sort_jumlah"></span></th>
+              <th class="no-sort">Plat / Reff</th>
+              <th class="no-sort" style="width: 120px; text-align:center;">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr><td colspan="11" style="text-align:center; padding: 40px; color:var(--text-muted);">Memuat transaksi...</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination Bar -->
+      <div class="table-pagination">
+        <div class="pagination-info">
+          <span>Menampilkan <strong id="pageRangeText" style="color:var(--text); font-weight:600;">0</strong> dari <strong id="pageTotalText" style="color:var(--text); font-weight:600;">0</strong> transaksi</span>
+          <span class="pagination-subtotal-badge" id="paginationSubtotalBadge">
+            &middot; Subtotal: <strong id="paginationSubtotalAmount">Rp 0</strong>
+          </span>
+        </div>
+        <div class="pagination-controls">
+          <div class="pagination-size-wrap">
+            <label for="selectPageSize" class="pagination-label">Tampilkan:</label>
+            <select id="selectPageSize" class="pagination-select" onchange="changePageSize()">
+              <option value="25">25</option>
+              <option value="50" selected>50</option>
+              <option value="100">100</option>
+              <option value="ALL">Semua</option>
+            </select>
+          </div>
+          <div class="pagination-buttons">
+            <button type="button" class="btn-page" id="btnFirstPage" onclick="goToPage(1)" title="Halaman Pertama">&laquo;</button>
+            <button type="button" class="btn-page" id="btnPrevPage" onclick="prevPage()" title="Halaman Sebelumnya">&lsaquo;</button>
+            <span class="page-indicator" id="pageIndicator">Hal 1 / 1</span>
+            <button type="button" class="btn-page" id="btnNextPage" onclick="nextPage()" title="Halaman Selanjutnya">&rsaquo;</button>
+            <button type="button" class="btn-page" id="btnLastPage" onclick="goToPage(totalPages)" title="Halaman Terakhir">&raquo;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Modal Dialog: Catat / Edit Transaksi -->
+  <dialog id="entryModal" class="entry-modal">
+    <div class="modal-wrapper">
+      <div class="modal-header">
+        <div>
+          <h2 class="modal-title" id="formHeaderTitle">Catat Pengeluaran Baru</h2>
+          <span class="modal-subtitle" id="modalSubtitle">Isi rincian transaksi belanja atau operasional florist</span>
+        </div>
+        <button type="button" class="btn-close-modal" onclick="closeEntryModal()" title="Tutup (Esc)">&times;</button>
+      </div>
+
+      <!-- Category Tabs -->
+      <div class="category-segments">
+        <button type="button" class="category-tab-btn active" onclick="setCategoryTab('Bunga')">Bunga</button>
+        <button type="button" class="category-tab-btn" onclick="setCategoryTab('Keperluan Florist')">Keperluan Florist</button>
+        <button type="button" class="category-tab-btn" onclick="setCategoryTab('Kendaraan Florist')">Kendaraan Florist</button>
+        <button type="button" class="category-tab-btn" onclick="setCategoryTab('Biaya Lainnya')">Biaya Lainnya</button>
+        <button type="button" class="category-tab-btn" onclick="setCategoryTab('Dels')">Dels</button>
+      </div>
+
+      <form id="ledgerForm" onsubmit="handleFormSubmit(event)">
+        <input type="hidden" id="editRowId" value="">
+        <input type="hidden" id="categoryField" value="Bunga">
+
+        <!-- Common Header Inputs -->
+        <div class="form-grid">
+          <!-- Tanggal -->
+          <div class="form-group col-4">
+            <label class="form-label" for="inputDate">Tanggal Transaksi</label>
+            <input type="date" id="inputDate" class="form-input" required onchange="checkDuplicateWarning()">
+          </div>
+
+          <!-- Toko / Supplier -->
+          <div class="form-group col-8" id="groupShop">
+            <label class="form-label" id="labelShop" for="inputShop">Toko / Supplier</label>
+            <input type="text" id="inputShop" class="form-input" list="dlShops" placeholder="Ketik atau pilih toko..." autocomplete="off" oninput="checkDuplicateWarning()">
+          </div>
+        </div>
+
+        <!-- Section: Kendaraan Florist (Khusus Kendaraan) -->
+        <div id="vehicleSection" class="form-grid" style="display:none; margin-top:12px;">
+          <div class="form-group col-6">
+            <label class="form-label" for="inputPlat">Nomor Plat Mobil</label>
+            <input type="text" id="inputPlat" class="form-input" list="dlPlates" placeholder="B 4160 SSV" autocomplete="off">
+          </div>
+          <div class="form-group col-6">
+            <label class="form-label" for="inputDetail">Rincian Operasional</label>
+            <input type="text" id="inputDetail" class="form-input" placeholder="BBM / Bengkel / Oli / Tol..." autocomplete="off">
+          </div>
+          <div class="form-group col-12">
+            <label class="form-label" for="inputVehicleTotal">Total Pengeluaran (Rp) *</label>
+            <input type="text" id="inputVehicleTotal" class="form-input form-input-number form-input-total" placeholder="0" oninput="onVehicleTotalInput()">
+            <div class="input-hint" id="hintVehicleTotal"></div>
+          </div>
+        </div>
+
+        <!-- Section: Input Satuan (Biaya Lainnya & Dels) -->
+        <div id="singleSection" class="form-grid" style="display:none; margin-top:12px;">
+          <div class="form-group col-12" id="groupSingleItem">
+            <label class="form-label" id="labelSingleItem" for="inputSingleItem">Keterangan Pengeluaran</label>
+            <input type="text" id="inputSingleItem" class="form-input" list="dlItems" placeholder="Uang makan, listrik, atk..." autocomplete="off" oninput="checkDuplicateWarning()">
+          </div>
+          <div class="form-group col-3" id="groupSingleQty">
+            <label class="form-label" for="inputSingleQty">Kuantitas (Qty)</label>
+            <input type="number" id="inputSingleQty" class="form-input form-input-number" min="0.1" step="any" value="1" oninput="recalcSingleTotal()">
+          </div>
+          <div class="form-group col-3" id="groupSingleSatuan">
+            <label class="form-label" for="inputSingleSatuan">Satuan</label>
+            <input type="text" id="inputSingleSatuan" class="form-input" placeholder="satuan">
+          </div>
+          <div class="form-group col-6" id="groupSinglePrice">
+            <label class="form-label" for="inputSinglePrice">Harga Satuan (Rp)</label>
+            <input type="text" id="inputSinglePrice" class="form-input form-input-number" placeholder="0" oninput="onSinglePriceInput()">
+            <div class="input-hint" id="hintSinglePrice"></div>
+          </div>
+          <div class="form-group col-12" id="groupSingleTotal">
+            <label class="form-label" for="inputSingleTotal">Total Pengeluaran (Rp) *</label>
+            <input type="text" id="inputSingleTotal" class="form-input form-input-number form-input-total" placeholder="0" oninput="onSingleTotalInput()">
+            <div class="input-hint" id="hintSingleTotal"></div>
+          </div>
+        </div>
+
+        <!-- Section: Multi-Barang dari 1 Toko (Bunga & Keperluan Florist) -->
+        <div id="itemsSection" style="margin-top:12px;">
+          <div class="items-table-wrap">
+            <table class="items-table">
+              <thead>
+                <tr>
+                  <th style="width:36%" id="thItemName">Jenis Bunga *</th>
+                  <th style="width:12%">Qty</th>
+                  <th style="width:14%">Satuan</th>
+                  <th style="width:17%">Harga Satuan</th>
+                  <th style="width:17%">Total (Rp) *</th>
+                  <th style="width:4%; text-align:center;"></th>
+                </tr>
+              </thead>
+              <tbody id="itemsTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="items-actions-bar">
+            <button type="button" class="btn-add-item" id="btnAddItemRow" onclick="addItemRow()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              <span id="btnAddItemText">+ Tambah Jenis Bunga Lain (Nota Sama)</span>
+            </button>
+            <div class="batch-total-display">
+              Total Belanja Toko: <strong id="itemsGrandTotalDisplay">Rp 0</strong> (<span id="itemsCountDisplay">1</span> barang)
+            </div>
+          </div>
+        </div>
+
+        <!-- Duplicate Warning Banner -->
+        <div id="dupWarning" class="dup-warning" style="display:none;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+          <span id="dupWarningText">Peringatan: Transaksi serupa (tanggal, toko, & nominal sama) sudah ada di buku kas.</span>
+        </div>
+
+        <div class="modal-footer">
+          <div class="modal-shortcuts-hint" id="modalShortcutsHint">
+            <kbd>Ctrl+Enter</kbd> Simpan &middot; <kbd>Esc</kbd> Batal
+          </div>
+          <div class="modal-actions-right">
+            <button type="button" class="btn btn-secondary" onclick="closeEntryModal()">Batal</button>
+            <button type="button" class="btn btn-secondary" id="btnSaveAndMore" onclick="handleFormSubmit(event, true)">Simpan & Catat Lagi</button>
+            <button type="submit" class="btn btn-primary" id="btnSubmit">Simpan & Tutup</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Autocomplete Datalists -->
+  <datalist id="dlShops"></datalist>
+  <datalist id="dlItems"></datalist>
+  <datalist id="dlPlates"></datalist>
+
+  <div id="toastNotification"></div>
+
+  <script>
+    let activePeriod = '';
+    let currentCategory = 'Bunga';
+    let currentFilter = 'Semua';
+    let currentRows = [];
+    let currentPage = 1;
+    let pageSize = 50;
+    let totalPages = 1;
+    let currentFilteredTotal = 0;
+    let sortColumn = 'tanggal';
+    let sortDirection = 'desc';
+    let debounceTimer = null;
+    let lastSavedRowId = null;
+    let allMonthsData = [];
+    let currentSubtotals = {};
+    let isAnalyticsOpen = false;
+
+    const currencyFmt = new Intl.NumberFormat('id-ID');
+
+    function formatRupiah(num) {
+      return 'Rp ' + currencyFmt.format(num || 0);
+    }
+
+    function cleanDigits(val) {
+      if (!val) return 0;
+      const digits = String(val).replace(/\D/g, '');
+      return digits ? parseInt(digits, 10) : 0;
+    }
+
+    function notify(text) {
+      const el = document.getElementById('toastNotification');
+      el.textContent = text;
+      el.style.display = 'block';
+      setTimeout(() => { el.style.display = 'none'; }, 2400);
+    }
+
+    async function initialize() {
+      await loadSuggestions();
+      await loadPeriods();
+      setupShortcuts();
+      if (!document.getElementById('itemsTableBody').children.length) {
+        addItemRow();
+      }
+    }
+
+    async function loadSuggestions() {
+      try {
+        const res = await fetch('/api/suggestions');
+        const data = await res.json();
+
+        document.getElementById('dlShops').innerHTML = data.shops.map(s => `<option value="${s}">`).join('');
+        document.getElementById('dlItems').innerHTML = data.items.map(i => `<option value="${i}">`).join('');
+        document.getElementById('dlPlates').innerHTML = data.plates.map(p => `<option value="${p}">`).join('');
+      } catch (err) {
+        console.error('Suggestions error:', err);
+      }
+    }
+
+    const monthNamesIndo = [
+      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    ];
+
+    function formatPeriodLabel(ym, count) {
+      if (!ym || !ym.includes('-')) return ym;
+      const [year, mStr] = ym.split('-');
+      const mIdx = parseInt(mStr, 10) - 1;
+      const monthName = monthNamesIndo[mIdx] || mStr;
+      const countStr = count !== undefined ? ` (${count} transaksi)` : '';
+      return `${monthName} ${year}${countStr}`;
+    }
+
+    async function loadPeriods() {
+      try {
+        const res = await fetch('/api/months');
+        const months = await res.json();
+        allMonthsData = months;
+        const sel = document.getElementById('selectPeriod');
+        sel.innerHTML = '';
+
+        if (!months.length) {
+          const currentYM = new Date().toISOString().slice(0, 7);
+          sel.innerHTML = `<option value="${currentYM}">${formatPeriodLabel(currentYM, 0)}</option>`;
+          activePeriod = currentYM;
+        } else {
+          let totalAllTx = 0;
+          months.forEach(m => totalAllTx += (m.total_transaksi || 0));
+
+          const optAll = document.createElement('option');
+          optAll.value = 'ALL';
+          optAll.textContent = `Semua Periode (${totalAllTx} transaksi)`;
+          sel.appendChild(optAll);
+
+          months.forEach(m => {
+            const opt = document.createElement('option');
+            opt.value = m.bulan;
+            opt.textContent = formatPeriodLabel(m.bulan, m.total_transaksi);
+            sel.appendChild(opt);
+          });
+          activePeriod = months[0].bulan;
+        }
+        sel.value = activePeriod;
+        setDefaultDate();
+        fetchTransactions();
+        if (isAnalyticsOpen) renderCharts();
+      } catch (err) {
+        console.error('Periods error:', err);
+      }
+    }
+
+    function setDefaultDate() {
+      const today = new Date().toISOString().slice(0, 10);
+      const currentYM = today.slice(0, 7);
+      if (activePeriod === 'ALL' || activePeriod === currentYM) {
+        document.getElementById('inputDate').value = today;
+      } else {
+        document.getElementById('inputDate').value = `${activePeriod}-01`;
+      }
+    }
+
+    function onPeriodChange() {
+      activePeriod = document.getElementById('selectPeriod').value;
+      setDefaultDate();
+      fetchTransactions();
+    }
+
+    function navigatePeriod(dir) {
+      const sel = document.getElementById('selectPeriod');
+      const target = sel.selectedIndex + dir;
+      if (target >= 0 && target < sel.options.length) {
+        sel.selectedIndex = target;
+        onPeriodChange();
+      }
+    }
+
+    function getDefaultPlaceholder() {
+      if (currentCategory === 'Bunga') return 'Mawar Merah, Aster, Krisan...';
+      if (currentCategory === 'Keperluan Florist') return 'Oasis, Kertas Wrapping, Pita...';
+      return 'Nama barang...';
+    }
+
+    const categoryUnits = {
+      'Bunga': ['Ikat', 'Gabung'],
+      'Keperluan Florist': ['Dus', 'Lusin', 'Pak', 'Pcs', 'Roll', 'Meter', 'Centimeter']
+    };
+
+    function getSatuanOptionsHtml(category, currentVal) {
+      const allowed = categoryUnits[category] || ['ikat', 'gabung'];
+      const matched = allowed.find(u => String(u).toLowerCase() === String(currentVal || '').toLowerCase());
+      const selected = matched || (category === 'Bunga' ? 'ikat' : 'Pcs');
+
+      return allowed.map(u => `<option value="${u}" ${u === selected ? 'selected' : ''}>${u}</option>`).join('');
+    }
+
+    function setCategoryTab(category) {
+      currentCategory = category;
+      document.getElementById('categoryField').value = category;
+
+      document.querySelectorAll('.category-segments .category-tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent === category);
+      });
+
+      const gShop = document.getElementById('groupShop');
+      const lShop = document.getElementById('labelShop');
+      const secVehicle = document.getElementById('vehicleSection');
+      const secSingle = document.getElementById('singleSection');
+      const secItems = document.getElementById('itemsSection');
+      const thItemName = document.getElementById('thItemName');
+      const btnAddItemText = document.getElementById('btnAddItemText');
+
+      if (category === 'Kendaraan Florist') {
+        gShop.style.display = 'none';
+        secItems.style.display = 'none';
+        secSingle.style.display = 'none';
+        secVehicle.style.display = 'grid';
+        if (!document.getElementById('inputDetail').value) {
+          document.getElementById('inputDetail').value = 'BBM';
+        }
+        document.getElementById('inputPlat').focus();
+      } else if (category === 'Biaya Lainnya') {
+        gShop.style.display = 'none';
+        secItems.style.display = 'none';
+        secVehicle.style.display = 'none';
+        secSingle.style.display = 'grid';
+
+        document.getElementById('labelSingleItem').textContent = 'Keterangan Pengeluaran';
+        document.getElementById('inputSingleItem').placeholder = 'Uang makan, listrik, atk...';
+        document.getElementById('groupSingleQty').style.display = 'none';
+        document.getElementById('groupSingleSatuan').style.display = 'none';
+        document.getElementById('groupSinglePrice').style.display = 'none';
+        document.getElementById('inputSingleItem').focus();
+      } else if (category === 'Dels') {
+        gShop.style.display = 'none';
+        secItems.style.display = 'none';
+        secVehicle.style.display = 'none';
+        secSingle.style.display = 'grid';
+
+        document.getElementById('labelSingleItem').textContent = 'Nama Barang';
+        document.getElementById('inputSingleItem').placeholder = 'Nama pesanan / barang...';
+        document.getElementById('groupSingleQty').style.display = 'flex';
+        document.getElementById('groupSingleSatuan').style.display = 'flex';
+        document.getElementById('inputSingleSatuan').placeholder = 'pcs/dus';
+        document.getElementById('groupSinglePrice').style.display = 'flex';
+        document.getElementById('inputSingleItem').focus();
+      } else {
+        // Multi-Item Table: Bunga & Keperluan Florist
+        gShop.style.display = 'flex';
+        secVehicle.style.display = 'none';
+        secSingle.style.display = 'none';
+        secItems.style.display = 'block';
+
+        if (category === 'Bunga') {
+          lShop.textContent = 'Toko / Supplier Bunga';
+          thItemName.textContent = 'Jenis Bunga *';
+          btnAddItemText.textContent = '+ Tambah Jenis Bunga Lain (Nota Sama)';
+        } else {
+          lShop.textContent = 'Toko / Supplier Florist';
+          thItemName.textContent = 'Nama Perlengkapan / Barang *';
+          btnAddItemText.textContent = '+ Tambah Barang Keperluan Florist (Nota Sama)';
+        }
+
+        // Perbarui opsi dropdown satuan dan placeholder di baris yang sudah ada
+        document.querySelectorAll('#itemsTableBody tr').forEach(tr => {
+          const itemInput = tr.querySelector('.items-item');
+          if (itemInput && !itemInput.value) {
+            itemInput.placeholder = getDefaultPlaceholder();
+          }
+          const satuanSelect = tr.querySelector('.items-satuan');
+          if (satuanSelect) {
+            const currentVal = satuanSelect.value;
+            satuanSelect.innerHTML = getSatuanOptionsHtml(category, currentVal);
+          }
+        });
+
+        document.getElementById('inputShop').focus();
+      }
+      checkDuplicateWarning();
+    }
+
+    function onSinglePriceInput() {
+      const price = cleanDigits(document.getElementById('inputSinglePrice').value);
+      document.getElementById('hintSinglePrice').innerHTML = price > 0 ? `Satuan: <strong>${formatRupiah(price)}</strong>` : '';
+      recalcSingleTotal();
+    }
+
+    function onSingleTotalInput() {
+      const total = cleanDigits(document.getElementById('inputSingleTotal').value);
+      document.getElementById('hintSingleTotal').innerHTML = total > 0 ? `Total: <strong>${formatRupiah(total)}</strong>` : '';
+      checkDuplicateWarning();
+    }
+
+    function recalcSingleTotal() {
+      const qty = parseFloat(document.getElementById('inputSingleQty').value) || 1;
+      const price = cleanDigits(document.getElementById('inputSinglePrice').value);
+      if (price > 0) {
+        const calculated = Math.round(qty * price);
+        document.getElementById('inputSingleTotal').value = calculated ? currencyFmt.format(calculated) : '';
+        document.getElementById('hintSingleTotal').innerHTML = `Total: <strong>${formatRupiah(calculated)}</strong>`;
+      }
+      checkDuplicateWarning();
+    }
+
+    function onVehicleTotalInput() {
+      const total = cleanDigits(document.getElementById('inputVehicleTotal').value);
+      document.getElementById('hintVehicleTotal').innerHTML = total > 0 ? `Total: <strong>${formatRupiah(total)}</strong>` : '';
+      checkDuplicateWarning();
+    }
+
+    async function fetchTransactions() {
+      const q = document.getElementById('searchBox').value.trim();
+      const endpoint = `/api/transactions?month=${activePeriod}&kategori=${encodeURIComponent(currentFilter)}&q=${encodeURIComponent(q)}&sortBy=${sortColumn}&sortOrder=${sortDirection}`;
+
+      try {
+        const res = await fetch(endpoint);
+        const data = await res.json();
+        currentRows = data.items;
+        currentSubtotals = data.subtotals;
+        currentFilteredTotal = data.filteredTotal !== undefined ? data.filteredTotal : data.grandTotal;
+
+        const totalTitleEl = document.getElementById('totalTitle');
+        if (totalTitleEl) {
+          totalTitleEl.textContent = (currentFilter === 'Semua') ? 'Total Beban Operasional' : `Total ${currentFilter}`;
+        }
+        document.getElementById('totalAmount').textContent = formatRupiah(currentFilter === 'Semua' ? data.grandTotal : currentFilteredTotal);
+        document.getElementById('sumBunga').textContent = formatRupiah(data.subtotals['Bunga']);
+        document.getElementById('sumFlorist').textContent = formatRupiah(data.subtotals['Keperluan Florist']);
+        document.getElementById('sumKendaraan').textContent = formatRupiah(data.subtotals['Kendaraan Florist']);
+        document.getElementById('sumLainnya').textContent = formatRupiah(data.subtotals['Biaya Lainnya']);
+        document.getElementById('sumDels').textContent = formatRupiah(data.subtotals['Dels']);
+        document.getElementById('totalRowCount').textContent = data.totalItems;
+
+        renderPaginatedTable();
+        if (isAnalyticsOpen) renderCharts();
+      } catch (err) {
+        console.error('Fetch transactions error:', err);
+      }
+    }
+
+    function renderPaginatedTable() {
+      const total = currentRows.length;
+      const size = (pageSize === 'ALL') ? total : parseInt(pageSize, 10);
+      totalPages = Math.max(1, Math.ceil(total / (size || 1)));
+
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      const startIndex = (currentPage - 1) * (size || 1);
+      const endIndex = (pageSize === 'ALL') ? total : Math.min(startIndex + size, total);
+      const rowsToRender = (pageSize === 'ALL') ? currentRows : currentRows.slice(startIndex, endIndex);
+
+      renderRows(rowsToRender, startIndex);
+
+      const rangeText = (total === 0) ? '0' : `${startIndex + 1}–${endIndex}`;
+      document.getElementById('pageRangeText').textContent = rangeText;
+      document.getElementById('pageTotalText').textContent = total;
+      document.getElementById('pageIndicator').textContent = `Hal ${total === 0 ? 0 : currentPage} / ${totalPages}`;
+      document.getElementById('paginationSubtotalAmount').textContent = formatRupiah(currentFilteredTotal);
+
+      document.getElementById('btnFirstPage').disabled = (currentPage <= 1 || total === 0);
+      document.getElementById('btnPrevPage').disabled = (currentPage <= 1 || total === 0);
+      document.getElementById('btnNextPage').disabled = (currentPage >= totalPages || total === 0);
+      document.getElementById('btnLastPage').disabled = (currentPage >= totalPages || total === 0);
+    }
+
+    function goToPage(p) {
+      currentPage = p;
+      renderPaginatedTable();
+    }
+
+    function nextPage() {
+      if (currentPage < totalPages) {
+        currentPage++;
+        renderPaginatedTable();
+      }
+    }
+
+    function prevPage() {
+      if (currentPage > 1) {
+        currentPage--;
+        renderPaginatedTable();
+      }
+    }
+
+    function changePageSize() {
+      const sel = document.getElementById('selectPageSize').value;
+      pageSize = (sel === 'ALL') ? 'ALL' : parseInt(sel, 10);
+      currentPage = 1;
+      renderPaginatedTable();
+    }
+
+    function renderRows(rows, startIndex = 0) {
+      const tbody = document.getElementById('tableBody');
+      if (!rows.length) {
+        tbody.innerHTML = `<tr><td colspan="11" style="text-align:center; padding: 44px; color:var(--text-muted);">Tidak ada transaksi yang cocok.</td></tr>`;
+        return;
+      }
+
+      let html = '';
+      rows.forEach((r, idx) => {
+        let badgeClass = 'badge-lainnya';
+        if (r.kategori === 'Bunga') badgeClass = 'badge-bunga';
+        else if (r.kategori === 'Keperluan Florist') badgeClass = 'badge-florist';
+        else if (r.kategori === 'Kendaraan Florist') badgeClass = 'badge-kendaraan';
+        else if (r.kategori === 'Dels') badgeClass = 'badge-dels';
+
+        const desc = r.jenis_barang || r.keterangan || (r.kategori === 'Kendaraan Florist' ? (r.detail || 'BBM') : '-');
+        const ref = r.nomor_plat || r.detail || '-';
+        const isFlash = (r.id === lastSavedRowId);
+
+        html += `
+          <tr class="${isFlash ? 'row-flash' : ''}">
+            <td style="color:var(--text-subtle); text-align:center; font-size:12px;">${startIndex + idx + 1}</td>
+            <td style="font-weight:600;">${r.tanggal}</td>
+            <td><span class="badge-category ${badgeClass}">${r.kategori}</span></td>
+            <td>${r.nama_toko || '-'}</td>
+            <td style="font-weight:500;">${desc}</td>
+            <td class="cell-num">${r.qty || 1}</td>
+            <td style="color:var(--text-muted);">${r.satuan || ''}</td>
+            <td class="cell-num">${r.harga_satuan ? formatRupiah(r.harga_satuan) : '-'}</td>
+            <td class="cell-num cell-bold">${formatRupiah(r.jumlah)}</td>
+            <td style="color:var(--text-muted); font-size:12px;">${ref}</td>
+            <td>
+              <div class="action-cell">
+                <button class="btn-action" onclick="duplicateRow(${r.id})" title="Duplikat transaksi ini">Salin</button>
+                <button class="btn-action" onclick="editRow(${r.id})">Edit</button>
+                <button class="btn-action btn-action-danger" onclick="deleteRow(${r.id})">Hapus</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      });
+      tbody.innerHTML = html;
+      lastSavedRowId = null;
+    }
+
+    function toggleSort(col) {
+      if (sortColumn === col) {
+        sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+      } else {
+        sortColumn = col;
+        sortDirection = 'desc';
+      }
+
+      ['tanggal', 'kategori', 'nama_toko', 'jenis_barang', 'jumlah'].forEach(c => {
+        const icon = document.getElementById(`sort_${c}`);
+        if (!icon) return;
+        if (c === sortColumn) {
+          icon.textContent = sortDirection === 'asc' ? '▲' : '▼';
+          icon.parentElement.classList.add('sorted');
+        } else {
+          icon.textContent = '';
+          icon.parentElement.classList.remove('sorted');
+        }
+      });
+
+      currentPage = 1;
+      fetchTransactions();
+    }
+
+    function applyCategoryFilter(cat) {
+      currentFilter = cat;
+      document.querySelectorAll('.filter-pills .filter-pill').forEach(pill => {
+        const pillCat = pill.getAttribute('data-pill') || pill.textContent.trim().split(' ')[0];
+        pill.classList.toggle('active', pillCat === cat);
+      });
+      document.querySelectorAll('.ledger-summary .summary-cell').forEach(cell => {
+        const cellCat = cell.getAttribute('data-cat') || '';
+        cell.classList.toggle('active-filter', cellCat === cat);
+      });
+      currentPage = 1;
+      fetchTransactions();
+    }
+
+    function onSearchInput() {
+      const val = document.getElementById('searchBox').value.trim();
+      document.getElementById('btnClearSearch').style.display = val ? 'inline-block' : 'none';
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => {
+        currentPage = 1;
+        fetchTransactions();
+      }, 180);
+    }
+
+    function clearSearch() {
+      const box = document.getElementById('searchBox');
+      box.value = '';
+      document.getElementById('btnClearSearch').style.display = 'none';
+      box.focus();
+      currentPage = 1;
+      fetchTransactions();
+    }
+
+    function openEntryModal() {
+      cancelEditing();
+      const modal = document.getElementById('entryModal');
+      modal.showModal();
+      const firstInput = (currentCategory === 'Kendaraan Florist')
+        ? document.getElementById('inputPlat')
+        : ((currentCategory === 'Biaya Lainnya' || currentCategory === 'Dels') ? document.getElementById('inputSingleItem') : document.getElementById('inputShop'));
+      if (firstInput) firstInput.focus();
+    }
+
+    function closeEntryModal() {
+      const modal = document.getElementById('entryModal');
+      modal.close();
+      cancelEditing();
+    }
+
+    function checkDuplicateWarning() {
+      const dateVal = document.getElementById('inputDate').value;
+      const editId = document.getElementById('editRowId').value;
+
+      let totalVal = 0;
+      let shopVal = '';
+
+      if (currentCategory === 'Kendaraan Florist') {
+        totalVal = cleanDigits(document.getElementById('inputVehicleTotal').value);
+      } else if (currentCategory === 'Biaya Lainnya' || currentCategory === 'Dels') {
+        totalVal = cleanDigits(document.getElementById('inputSingleTotal').value);
+      } else {
+        shopVal = document.getElementById('inputShop').value.trim().toLowerCase();
+        totalVal = cleanDigits(document.getElementById('itemsGrandTotalDisplay').textContent);
+      }
+
+      if (!dateVal || !totalVal || totalVal <= 0) {
+        document.getElementById('dupWarning').style.display = 'none';
+        return;
+      }
+
+      const dup = currentRows.find(r => {
+        if (editId && String(r.id) === String(editId)) return false;
+        const matchDate = (r.tanggal === dateVal);
+        const matchTotal = (Number(r.jumlah) === totalVal);
+        const matchShop = shopVal ? (r.nama_toko && r.nama_toko.toLowerCase() === shopVal) : true;
+        return matchDate && matchTotal && matchShop;
+      });
+
+      if (dup) {
+        document.getElementById('dupWarningText').textContent =
+          `Peringatan: Transaksi serupa tanggal ${dup.tanggal} (${dup.nama_toko || 'Toko/Operasional'}, ${formatRupiah(dup.jumlah)}) sudah ada di buku kas.`;
+        document.getElementById('dupWarning').style.display = 'flex';
+      } else {
+        document.getElementById('dupWarning').style.display = 'none';
+      }
+    }
+
+    function addItemRow(data = {}) {
+      const tbody = document.getElementById('itemsTableBody');
+      const tr = document.createElement('tr');
+      const priceVal = data.harga_satuan ? currencyFmt.format(data.harga_satuan) : '';
+      const totalVal = data.jumlah ? currencyFmt.format(data.jumlah) : '';
+      const satuanOptions = getSatuanOptionsHtml(currentCategory, data.satuan);
+
+      tr.innerHTML = `
+        <td>
+          <input type="text" class="items-input items-item" list="dlItems" placeholder="${getDefaultPlaceholder()}" value="${data.jenis_barang || ''}" onkeydown="onItemRowKey(event, this)" oninput="checkDuplicateWarning()" autocomplete="off">
+        </td>
+        <td>
+          <input type="number" class="items-input items-input-num items-qty" min="0.1" step="any" value="${data.qty || 1}" oninput="recalcItemRow(this)">
+        </td>
+        <td>
+          <select class="items-input items-satuan" onchange="checkDuplicateWarning()">
+            ${satuanOptions}
+          </select>
+        </td>
+        <td>
+          <input type="text" class="items-input items-input-num items-price" placeholder="0" value="${priceVal}" oninput="formatItemPrice(this)">
+        </td>
+        <td>
+          <input type="text" class="items-input items-input-num items-total" placeholder="0" value="${totalVal}" oninput="formatItemTotal(this)">
+        </td>
+        <td style="text-align:center;">
+          <button type="button" class="btn-remove-row" onclick="removeItemRow(this)" title="Hapus baris">&times;</button>
+        </td>
+      `;
+      tbody.appendChild(tr);
+      recalcItemsTotal();
+
+      const itemInput = tr.querySelector('.items-item');
+      if (itemInput && !data.jenis_barang) {
+        itemInput.focus();
+      }
+    }
+
+    function removeItemRow(btn) {
+      const tr = btn.closest('tr');
+      const tbody = document.getElementById('itemsTableBody');
+      if (tbody.children.length > 1) {
+        tr.remove();
+      } else {
+        tr.querySelectorAll('input').forEach(inp => {
+          if (inp.classList.contains('items-qty')) inp.value = '1';
+          else inp.value = '';
+        });
+        const select = tr.querySelector('.items-satuan');
+        if (select) select.value = (currentCategory === 'Bunga' ? 'ikat' : 'Pcs');
+      }
+      recalcItemsTotal();
+    }
+
+    function onItemRowKey(e, input) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addItemRow();
+      }
+    }
+
+    function formatItemPrice(input) {
+      const digits = cleanDigits(input.value);
+      input.value = digits ? currencyFmt.format(digits) : '';
+      const tr = input.closest('tr');
+      const qty = parseFloat(tr.querySelector('.items-qty').value) || 1;
+      if (digits > 0) {
+        const subtotal = Math.round(qty * digits);
+        tr.querySelector('.items-total').value = currencyFmt.format(subtotal);
+      }
+      recalcItemsTotal();
+    }
+
+    function formatItemTotal(input) {
+      const digits = cleanDigits(input.value);
+      input.value = digits ? currencyFmt.format(digits) : '';
+      recalcItemsTotal();
+    }
+
+    function recalcItemRow(input) {
+      const tr = input.closest('tr');
+      const qty = parseFloat(input.value) || 1;
+      const price = cleanDigits(tr.querySelector('.items-price').value);
+      if (price > 0) {
+        const subtotal = Math.round(qty * price);
+        tr.querySelector('.items-total').value = currencyFmt.format(subtotal);
+      }
+      recalcItemsTotal();
+    }
+
+    function recalcItemsTotal() {
+      let sum = 0;
+      let count = 0;
+      document.querySelectorAll('#itemsTableBody tr').forEach(tr => {
+        const itemVal = tr.querySelector('.items-item').value.trim();
+        const totVal = cleanDigits(tr.querySelector('.items-total').value);
+        if (totVal > 0) {
+          sum += totVal;
+          count++;
+        } else if (itemVal) {
+          count++;
+        }
+      });
+      document.getElementById('itemsGrandTotalDisplay').textContent = formatRupiah(sum);
+      document.getElementById('itemsCountDisplay').textContent = Math.max(1, count);
+      checkDuplicateWarning();
+    }
+
+    async function handleFormSubmit(e, continueAdding = false) {
+      if (e) e.preventDefault();
+
+      const editId = document.getElementById('editRowId').value;
+      const tanggal = document.getElementById('inputDate').value;
+      const kategori = document.getElementById('categoryField').value;
+
+      if (!tanggal) {
+        alert('Tanggal transaksi wajib diisi.');
+        return;
+      }
+
+      // 1. Kasus Kendaraan Florist
+      if (kategori === 'Kendaraan Florist') {
+        const jumlah = cleanDigits(document.getElementById('inputVehicleTotal').value);
+        if (!jumlah || jumlah <= 0) {
+          alert('Total pengeluaran operasional kendaraan wajib diisi.');
+          return;
+        }
+
+        const payload = {
+          tanggal,
+          kategori,
+          nama_toko: '',
+          jenis_barang: '',
+          qty: 1,
+          satuan: '',
+          harga_satuan: jumlah,
+          jumlah,
+          detail: document.getElementById('inputDetail').value.trim() || 'BBM',
+          nomor_plat: document.getElementById('inputPlat').value.trim()
+        };
+
+        const url = editId ? `/api/transactions/${editId}` : '/api/transactions';
+        const method = editId ? 'PUT' : 'POST';
+
+        try {
+          const res = await fetch(url, {
+            method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const out = await res.json();
+          if (!res.ok) {
+            alert(out.error || 'Gagal menyimpan transaksi kendaraan.');
+            return;
+          }
+
+          notify(editId ? 'Transaksi kendaraan diperbarui' : 'Transaksi kendaraan tersimpan');
+
+          if (continueAdding) {
+            document.getElementById('editRowId').value = '';
+            document.getElementById('inputVehicleTotal').value = '';
+            document.getElementById('hintVehicleTotal').textContent = '';
+            document.getElementById('inputPlat').focus();
+          } else {
+            closeEntryModal();
+          }
+          fetchTransactions();
+          loadSuggestions();
+          loadPeriods();
+        } catch (err) {
+          alert('Kesalahan jaringan: ' + err.message);
+        }
+        return;
+      }
+
+      // 2. Kasus Biaya Lainnya & Dels (Form Satuan)
+      if (kategori === 'Biaya Lainnya' || kategori === 'Dels') {
+        const jenis_barang = document.getElementById('inputSingleItem').value.trim();
+        const qty = parseFloat(document.getElementById('inputSingleQty').value) || 1;
+        const satuan = document.getElementById('inputSingleSatuan').value.trim();
+        const harga_satuan = cleanDigits(document.getElementById('inputSinglePrice').value);
+        const jumlah = cleanDigits(document.getElementById('inputSingleTotal').value);
+
+        if (!jumlah || jumlah <= 0) {
+          alert('Total pengeluaran wajib diisi.');
+          return;
+        }
+
+        const payload = {
+          tanggal,
+          kategori,
+          nama_toko: '',
+          jenis_barang,
+          qty,
+          satuan,
+          harga_satuan,
+          jumlah,
+          detail: '',
+          nomor_plat: ''
+        };
+
+        const url = editId ? `/api/transactions/${editId}` : '/api/transactions';
+        const method = editId ? 'PUT' : 'POST';
+
+        try {
+          const res = await fetch(url, {
+            method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const out = await res.json();
+          if (!res.ok) {
+            alert(out.error || 'Gagal menyimpan transaksi.');
+            return;
+          }
+
+          notify(editId ? 'Transaksi diperbarui' : 'Transaksi tersimpan');
+
+          if (continueAdding) {
+            document.getElementById('editRowId').value = '';
+            document.getElementById('inputSingleItem').value = '';
+            document.getElementById('inputSingleQty').value = 1;
+            document.getElementById('inputSingleSatuan').value = '';
+            document.getElementById('inputSinglePrice').value = '';
+            document.getElementById('inputSingleTotal').value = '';
+            document.getElementById('hintSinglePrice').textContent = '';
+            document.getElementById('hintSingleTotal').textContent = '';
+            document.getElementById('dupWarning').style.display = 'none';
+            document.getElementById('inputSingleItem').focus();
+          } else {
+            closeEntryModal();
+          }
+          fetchTransactions();
+          loadSuggestions();
+          loadPeriods();
+        } catch (err) {
+          alert('Kesalahan jaringan: ' + err.message);
+        }
+        return;
+      }
+
+      // 3. Kasus Multi-Barang dari 1 Toko (Bunga & Keperluan Florist)
+      const nama_toko = document.getElementById('inputShop').value.trim();
+      const rows = document.querySelectorAll('#itemsTableBody tr');
+      const items = [];
+
+      rows.forEach(tr => {
+        const jenis_barang = tr.querySelector('.items-item').value.trim();
+        const qty = tr.querySelector('.items-qty').value;
+        const satuan = tr.querySelector('.items-satuan').value.trim();
+        const harga_satuan = tr.querySelector('.items-price').value;
+        const jumlah = cleanDigits(tr.querySelector('.items-total').value);
+
+        if (jumlah > 0 || jenis_barang) {
+          items.push({
+            jenis_barang: jenis_barang || (kategori === 'Bunga' ? 'Bunga Segar' : 'Barang Florist'),
+            qty,
+            satuan,
+            harga_satuan,
+            jumlah
+          });
+        }
+      });
+
+      if (!items.length || items.every(it => it.jumlah <= 0)) {
+        alert('Isi minimal 1 baris barang dengan nominal > 0.');
+        return;
+      }
+
+      // Mode Edit Transaksi Tunggal
+      if (editId) {
+        const it = items[0];
+        const payload = {
+          tanggal,
+          kategori,
+          nama_toko,
+          jenis_barang: it.jenis_barang,
+          qty: it.qty,
+          satuan: it.satuan,
+          harga_satuan: it.harga_satuan,
+          jumlah: it.jumlah,
+          detail: '',
+          nomor_plat: ''
+        };
+
+        try {
+          const res = await fetch(`/api/transactions/${editId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          const out = await res.json();
+          if (!res.ok) {
+            alert(out.error || 'Gagal memperbarui transaksi.');
+            return;
+          }
+          notify('Transaksi berhasil diperbarui');
+          closeEntryModal();
+          fetchTransactions();
+          loadSuggestions();
+          loadPeriods();
+        } catch (err) {
+          alert('Kesalahan jaringan: ' + err.message);
+        }
+        return;
+      }
+
+      // Mode Tambah Transaksi Baru (Bunga & Keperluan Florist)
+      try {
+        const res = await fetch('/api/transactions/batch', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            tanggal,
+            kategori,
+            nama_toko,
+            nomor_plat: '',
+            items
+          })
+        });
+        const out = await res.json();
+        if (!res.ok) {
+          alert(out.error || 'Gagal menyimpan transaksi belanja.');
+          return;
+        }
+
+        notify(`${out.count} barang dari "${nama_toko || 'Toko'}" berhasil dicatat`);
+
+        if (continueAdding) {
+          document.getElementById('editRowId').value = '';
+          document.getElementById('inputShop').value = '';
+          const tbody = document.getElementById('itemsTableBody');
+          tbody.innerHTML = '';
+          addItemRow();
+          document.getElementById('dupWarning').style.display = 'none';
+          document.getElementById('inputShop').focus();
+        } else {
+          closeEntryModal();
+        }
+
+        fetchTransactions();
+        loadSuggestions();
+        loadPeriods();
+      } catch (err) {
+        alert('Kesalahan jaringan: ' + err.message);
+      }
+    }
+
+    function duplicateRow(id) {
+      const row = currentRows.find(x => x.id === id);
+      if (!row) return;
+
+      cancelEditing();
+      setCategoryTab(row.kategori);
+
+      if (row.kategori === 'Kendaraan Florist') {
+        document.getElementById('inputPlat').value = row.nomor_plat || '';
+        document.getElementById('inputDetail').value = row.detail || 'BBM';
+        document.getElementById('inputVehicleTotal').value = row.jumlah ? currencyFmt.format(row.jumlah) : '';
+        onVehicleTotalInput();
+      } else if (row.kategori === 'Biaya Lainnya' || row.kategori === 'Dels') {
+        document.getElementById('inputSingleItem').value = row.jenis_barang || row.keterangan || '';
+        document.getElementById('inputSingleQty').value = row.qty || 1;
+        document.getElementById('inputSingleSatuan').value = row.satuan || '';
+        document.getElementById('inputSinglePrice').value = row.harga_satuan ? currencyFmt.format(row.harga_satuan) : '';
+        document.getElementById('inputSingleTotal').value = row.jumlah ? currencyFmt.format(row.jumlah) : '';
+        onSinglePriceInput();
+        onSingleTotalInput();
+      } else {
+        document.getElementById('inputShop').value = row.nama_toko || '';
+        const tbody = document.getElementById('itemsTableBody');
+        tbody.innerHTML = '';
+        addItemRow({
+          jenis_barang: row.jenis_barang || row.keterangan || '',
+          qty: row.qty || 1,
+          satuan: row.satuan || '',
+          harga_satuan: row.harga_satuan || '',
+          jumlah: row.jumlah || ''
+        });
+      }
+
+      checkDuplicateWarning();
+      const modal = document.getElementById('entryModal');
+      modal.showModal();
+      notify('Data disalin ke formulir transaksi baru');
+
+      const firstInput = (row.kategori === 'Kendaraan Florist')
+        ? document.getElementById('inputPlat')
+        : ((row.kategori === 'Biaya Lainnya' || row.kategori === 'Dels') ? document.getElementById('inputSingleItem') : document.getElementById('inputShop'));
+      if (firstInput) firstInput.focus();
+    }
+
+    function editRow(id) {
+      const row = currentRows.find(x => x.id === id);
+      if (!row) return;
+
+      cancelEditing();
+      document.getElementById('editRowId').value = row.id;
+      document.getElementById('formHeaderTitle').textContent = `Edit Transaksi #${row.id}`;
+      document.getElementById('modalSubtitle').textContent = 'Perbarui data transaksi di buku kas';
+      document.getElementById('btnSaveAndMore').style.display = 'none';
+      document.getElementById('btnAddItemRow').style.display = 'none';
+      document.getElementById('btnSubmit').textContent = 'Perbarui Transaksi';
+
+      setCategoryTab(row.kategori);
+      document.getElementById('inputDate').value = row.tanggal;
+
+      if (row.kategori === 'Kendaraan Florist') {
+        document.getElementById('inputPlat').value = row.nomor_plat || '';
+        document.getElementById('inputDetail').value = row.detail || 'BBM';
+        document.getElementById('inputVehicleTotal').value = row.jumlah ? currencyFmt.format(row.jumlah) : '';
+        onVehicleTotalInput();
+      } else if (row.kategori === 'Biaya Lainnya' || row.kategori === 'Dels') {
+        document.getElementById('inputSingleItem').value = row.jenis_barang || row.keterangan || '';
+        document.getElementById('inputSingleQty').value = row.qty || 1;
+        document.getElementById('inputSingleSatuan').value = row.satuan || '';
+        document.getElementById('inputSinglePrice').value = row.harga_satuan ? currencyFmt.format(row.harga_satuan) : '';
+        document.getElementById('inputSingleTotal').value = row.jumlah ? currencyFmt.format(row.jumlah) : '';
+        onSinglePriceInput();
+        onSingleTotalInput();
+      } else {
+        document.getElementById('inputShop').value = row.nama_toko || '';
+        const tbody = document.getElementById('itemsTableBody');
+        tbody.innerHTML = '';
+        addItemRow({
+          jenis_barang: row.jenis_barang || row.keterangan || '',
+          qty: row.qty || 1,
+          satuan: row.satuan || '',
+          harga_satuan: row.harga_satuan || '',
+          jumlah: row.jumlah || ''
+        });
+      }
+
+      const modal = document.getElementById('entryModal');
+      modal.showModal();
+    }
+
+    function cancelEditing() {
+      document.getElementById('editRowId').value = '';
+      document.getElementById('formHeaderTitle').textContent = 'Catat Pengeluaran Baru';
+      document.getElementById('modalSubtitle').textContent = 'Isi rincian transaksi belanja atau operasional florist';
+      document.getElementById('btnSaveAndMore').style.display = 'inline-flex';
+      document.getElementById('btnAddItemRow').style.display = 'inline-flex';
+      document.getElementById('btnSubmit').textContent = 'Simpan & Tutup';
+      document.getElementById('ledgerForm').reset();
+      document.getElementById('hintVehicleTotal').textContent = '';
+      document.getElementById('hintSinglePrice').textContent = '';
+      document.getElementById('hintSingleTotal').textContent = '';
+      document.getElementById('dupWarning').style.display = 'none';
+
+      const tbody = document.getElementById('itemsTableBody');
+      tbody.innerHTML = '';
+      setCategoryTab('Bunga');
+      addItemRow();
+      setDefaultDate();
+    }
+
+    function toggleAnalytics() {
+      isAnalyticsOpen = !isAnalyticsOpen;
+      const el = document.getElementById('analyticsCard');
+      const label = document.getElementById('labelToggleChart');
+      el.style.display = isAnalyticsOpen ? 'block' : 'none';
+      label.textContent = isAnalyticsOpen ? 'Tutup Grafik' : 'Grafik Tren';
+      if (isAnalyticsOpen) renderCharts();
+    }
+
+    function selectPeriodFromChart(ym) {
+      const sel = document.getElementById('selectPeriod');
+      sel.value = ym;
+      onPeriodChange();
+      notify(`Beralih ke periode ${formatPeriodLabel(ym)}`);
+    }
+
+    function renderCharts() {
+      const barContainer = document.getElementById('categoryStackedBar');
+      const legendGrid = document.getElementById('categoryLegendGrid');
+      const badge = document.getElementById('chartPeriodLabel');
+      const chartContainer = document.getElementById('monthlyBarChart');
+      if (!barContainer || !legendGrid) return;
+
+      badge.textContent = activePeriod === 'ALL' ? 'Semua Periode' : formatPeriodLabel(activePeriod);
+
+      const catColors = {
+        'Bunga': '#9E2A4B',
+        'Keperluan Florist': '#8F5326',
+        'Kendaraan Florist': '#1D6348',
+        'Biaya Lainnya': '#485B6C',
+        'Dels': '#684984'
+      };
+
+      // 1. Render Category Composition
+      const total = Object.values(currentSubtotals).reduce((a, b) => a + b, 0);
+      let barHtml = '';
+      let legendHtml = '';
+
+      if (total > 0) {
+        Object.keys(catColors).forEach(cat => {
+          const amt = currentSubtotals[cat] || 0;
+          const pct = ((amt / total) * 100).toFixed(1);
+          if (amt > 0) {
+            barHtml += `<div class="stacked-bar-seg" style="width:${pct}%; background:${catColors[cat]};" title="${cat}: ${formatRupiah(amt)} (${pct}%)"></div>`;
+          }
+          legendHtml += `
+            <div class="legend-item">
+              <div class="legend-label-wrap">
+                <span class="legend-dot" style="background:${catColors[cat]};"></span>
+                <span class="legend-name">${cat} (${pct}%)</span>
+              </div>
+              <span class="legend-amount">${formatRupiah(amt)}</span>
+            </div>
+          `;
+        });
+      } else {
+        barHtml = '<div style="width:100%; height:100%; background:var(--border);"></div>';
+        legendHtml = '<div style="grid-column:span 2; color:var(--text-muted); font-size:12px; text-align:center; padding:8px;">Belum ada pengeluaran pada filter ini.</div>';
+      }
+      barContainer.innerHTML = barHtml;
+      legendGrid.innerHTML = legendHtml;
+
+      // 2. Render Monthly SVG Bar Chart
+      if (allMonthsData.length && chartContainer) {
+        const monthsList = [...allMonthsData].reverse();
+        const maxAmt = Math.max(...monthsList.map(m => m.grand_total || 0), 1);
+        const svgW = 460;
+        const svgH = 135;
+        const padL = 10;
+        const padR = 10;
+        const padB = 26;
+        const padT = 16;
+        const chartW = svgW - padL - padR;
+        const chartH = svgH - padB - padT;
+
+        const barWidth = Math.max(16, Math.min(38, Math.floor(chartW / monthsList.length) - 8));
+        const gap = (chartW - (barWidth * monthsList.length)) / (monthsList.length + 1);
+
+        let svg = `<svg width="100%" height="100%" viewBox="0 0 ${svgW} ${svgH}" style="overflow:visible;">`;
+        svg += `<line x1="${padL}" y1="${svgH - padB}" x2="${svgW - padR}" y2="${svgH - padB}" stroke="var(--border-strong)" stroke-width="1"/>`;
+
+        monthsList.forEach((m, idx) => {
+          const x = padL + gap + idx * (barWidth + gap);
+          const amt = m.grand_total || 0;
+          const h = Math.round((amt / maxAmt) * chartH);
+          const y = svgH - padB - h;
+          const isActive = (m.bulan === activePeriod);
+          const color = isActive ? 'var(--gold)' : 'var(--brand)';
+          const [, mo] = m.bulan.split('-');
+          const mShort = (monthNamesIndo[parseInt(mo, 10) - 1] || mo).slice(0, 3);
+
+          svg += `
+            <g class="chart-bar-group" onclick="selectPeriodFromChart('${m.bulan}')">
+              <rect class="chart-bar-rect ${isActive ? 'active-period-bar' : ''}" x="${x}" y="${y}" width="${barWidth}" height="${h}" rx="3" fill="${color}" opacity="${isActive ? '1' : '0.85'}">
+                <title>${formatPeriodLabel(m.bulan)}: ${formatRupiah(amt)} (${m.total_transaksi} tx)</title>
+              </rect>
+              <text x="${x + barWidth / 2}" y="${svgH - 8}" font-size="11" font-weight="${isActive ? '700' : '500'}" fill="${isActive ? 'var(--gold)' : 'var(--text-muted)'}" text-anchor="middle" font-family="inherit">${mShort}</text>
+            </g>
+          `;
+        });
+        svg += `</svg>`;
+        chartContainer.innerHTML = svg;
+      }
+    }
+
+    async function deleteRow(id) {
+      if (!confirm('Hapus baris transaksi ini?')) return;
+      try {
+        const res = await fetch(`/api/transactions/${id}`, { method: 'DELETE' });
+        if (res.ok) {
+          notify('Transaksi berhasil dihapus');
+          fetchTransactions();
+        } else {
+          alert('Gagal menghapus transaksi.');
+        }
+      } catch (err) {
+        alert('Kesalahan jaringan: ' + err.message);
+      }
+    }
+
+    function exportDataExcel() {
+      window.location.href = `/api/export?month=${activePeriod}`;
+    }
+
+    function setupShortcuts() {
+      const modal = document.getElementById('entryModal');
+
+      window.addEventListener('keydown', (e) => {
+        const isModalOpen = modal.open;
+
+        // Ctrl + Enter: Simpan saat modal aktif
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+          if (isModalOpen) {
+            e.preventDefault();
+            handleFormSubmit(null, false);
+          }
+          return;
+        }
+
+        // Alt + N: Buka modal transaksi baru
+        if (e.altKey && (e.key === 'n' || e.key === 'N')) {
+          e.preventDefault();
+          openEntryModal();
+          return;
+        }
+
+        // '/' atau Ctrl + K: Fokus ke pencarian saat modal tertutup
+        if (!isModalOpen) {
+          if ((e.key === '/' && e.target.tagName !== 'INPUT' && e.target.tagName !== 'SELECT') ||
+              ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K'))) {
+            e.preventDefault();
+            const s = document.getElementById('searchBox');
+            s.focus();
+            s.select();
+            return;
+          }
+        }
+
+        // Escape: Batal pencarian jika modal tertutup
+        if (e.key === 'Escape') {
+          if (!isModalOpen) {
+            if (document.activeElement === document.getElementById('searchBox') || document.getElementById('searchBox').value) {
+              clearSearch();
+            }
+          }
+        }
+      });
+
+      // Tutup modal jika klik di luar area dialog (backdrop)
+      modal.addEventListener('click', (e) => {
+        const rect = modal.getBoundingClientRect();
+        const isInDialog = (
+          rect.top <= e.clientY &&
+          e.clientY <= rect.top + rect.height &&
+          rect.left <= e.clientX &&
+          e.clientX <= rect.left + rect.width
+        );
+        if (!isInDialog) {
+          closeEntryModal();
+        }
+      });
+    }
+
+    initialize();
+  </script>
+</body>
+</html>

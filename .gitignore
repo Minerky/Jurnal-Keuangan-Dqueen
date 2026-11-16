@@ -1,0 +1,4 @@
+node_modules/
+jurnal.db
+*.db-shm
+*.db-wal

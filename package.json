@@ -1,0 +1,12 @@
+{
+  "name": "jurnal-keuangan-dqueen",
+  "version": "1.0.0",
+  "description": "Aplikasi Web Jurnal Keuangan DQueen Florist dengan SQLite Lokal",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "migrate": "node migrate.js"
+  },
+  "author": "Rezky",
+  "license": "ISC"
+}
